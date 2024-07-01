@@ -2,7 +2,7 @@
 // Here you should import the required packages for your Express app: `express` and `morgan`
 
 const express = require('express');
-const logger = require('morgan');
+const morgan = require('morgan');
 
 // CREATE EXPRESS APP
 // Here you should create your Express app:
@@ -22,7 +22,18 @@ app.use(express.json());
 // ROUTES
 // Start defining your routes here:
 
+app.get('/', (req,res)=> {
+    res.sendFile(__dirname + '/views/home.html')
+})
 
+app.get('/blog', (req, res) => {
+    res.sendFile(__dirname + '/views/blog.html')
+})
+
+app.get('/api/projects', (req, res) => {
+    const projects = require('./data/projects.json');
+    res.json(projects);
+});
 
 // START THE SERVER
 // Make your Express server listen on port 5005:
